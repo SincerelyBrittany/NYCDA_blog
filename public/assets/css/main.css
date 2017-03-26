@@ -1,0 +1,62 @@
+/**/
+
+
+
+
+/*-------------------------MY CODE!!!!-------------------------*/
+
+html{
+   /* The image used */
+    background-image: url("/assets/images/backgroundimage.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.page-title{
+  text-align: center;
+  font-weight: 100;
+  font-size: 200px;
+  color: #dabece;
+  font-family: Georgia, serif;
+}
+
+.wrapper {
+    width: 1500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+
+.header-description {
+	border: 1px solid #000;
+  	text-align: center;
+}
+
+
+.col4 {
+	height: 200px;
+	border: 1px solid #000;
+  	text-align: center;
+  	background-color: pink;
+    box-sizing: border-box;
+    font-size: 50px;
+    
+}
+
+
+
+
+
+
+
+
+
