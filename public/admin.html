@@ -2,17 +2,18 @@
 <html>
 <head>
 	<meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Todo List</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0;'>
+    <title>Brittany Blog</title>
     <link rel='stylesheet' href='styles/reset.css'>
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <link rel='stylesheet' href='styles/main.css'>
 </head>
-<body id="todoapp">
+<body id="blogapp">
 
 	<!-- NAV BAR -->
 	<nav class="navbar navbar-default">
@@ -28,23 +29,28 @@
 	<!-- BODY -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2 todo-col"></div>
-			<div class="col-md-8 todo-col">
+			<div class="col-md-2 blog-col"></div>
+			<div class="col-md-8 blog-col">
 
-				<ul class="list-group js-todolist">
+				<ul class="list-group js-bloglist">
 					<li class="list-group-item">
-						<span class="glyphicon glyphicon-refresh todo-spinner"></span>
+						<span class="glyphicon glyphicon-refresh blog-spinner"></span>
 					</li>
+					<h4 class="list-group-item"></h4>
 				</ul>
 
 				<div class="input-group">
-						<input type="text" class="form-control js-todo-text" placeholder="Recipient's username" aria-describedby="basic-addon2">
-						<span class="input-group-addon todo-addbtn js-add-todo" id="basic-addon2">Add Todo</span>
-				</div><!-- js-add-todo -->
+						<input type="text" class="form-control js-blog-text" placeholder="Blog Title" >
+						<textarea class="form-control js-blog-body-text"  placeholder="Blog Text" "></textarea>
+						
 
+				</div><!-- js-add-blog -->
+				<div class="input-submit">
+				<span class="input-group-addon blog-addbtn js-add-blog" id="basic-addon2">Add blog</span>
+				</div>
 
 			</div><!-- content -->
-			<div class="col-md-2 todo-col"></div>
+			<div class="col-md-2 blog-col"></div>
 		</div><!-- row -->
 	</div><!-- container -->
 

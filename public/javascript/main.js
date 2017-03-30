@@ -51,7 +51,7 @@
 		});
 	} // POST
 
-	function DELETE(url, data = {}) {
+	function DELETE(url, data) {
 		return new Promise((resolve, reject) => {
 			const request = new XMLHttpRequest();
 			request.open('DELETE', url);
@@ -69,138 +69,129 @@
 		});
 	} // DELETE
 
-	function render(todoItems) {
-
-		const container = document.querySelector('.js-todolist');
+	function render(blogItems) {
+		const container = document.querySelector('.js-bloglist');
 		container.innerHTML = '';
-		for (const todoItem of todoItems) {
-			console.log(todoItem)
-			const li = document.createElement('li');
-			li.innerHTML = `
-${todoItem.data.todo}
+		for (const blogItem of blogItems) {
+			
+			const h4 = document.createElement('h4');
+			h4.innerHTML = `
+                     <span class="js-title-text">${blogItem.data.blog}</span>    
 			`;
 
-			li.innerHTML += `<span class="glyphicon glyphicon-remove todolist-icon js-todo-remove"></span>`;
-
-			if (todoItem.data.isDone) {
-				li.innerHTML += `<span class="glyphicon glyphicon-check todolist-icon js-todo-check green"></span>`
-			}
-			else {
-				li.innerHTML += `<span class="glyphicon glyphicon-unchecked todolist-icon js-todo-check"></span>`
-			}
+			const editBtn = document.createElement('button');
+			editBtn.classList.add('glyphicon', 'glyphicon-edit', 'js-edit');
+			editBtn.style.float = 'right';
 
 
-			li.classList.add('list-group-item', 'todolist-item');
+			const closeBtn = document.createElement('button');
+			closeBtn.classList.add('glyphicon', 'glyphicon-remove', 'js-remove');
+			closeBtn.style.float = 'right';
 
-			container.appendChild(li);
-			li.querySelector('.js-todo-remove').addEventListener('click', (e) => {
-				console.log('about to delete LOL')
-				const {id} = todoItem;
 
-				DELETE('/api/todo/' + id)
-					.then((data) => {
-						render(data);
-					})
-					.catch((e) => {
-						alert(e)
-					});
+			h4.appendChild(closeBtn);
+			h4.appendChild(editBtn);
+
+
+			h4.classList.add('list-group-item', 'bloglist-item');
+
+			container.appendChild(h4);
+
+			const li = document.createElement('div');
+			li.innerHTML = `
+                     <div  class="js-content-text">${blogItem.data.blogText}</div>  
+			`;
+
+
+			li.classList.add('list-group-item', 'bloglist-item');
+
+			// const textarea = 
+
+			const div = document.createElement('div');
+			div.appendChild(h4);
+			div.appendChild(li);
+			container.appendChild(div);
+
+			const editDiv = document.createElement('div');
+			editDiv.innerHTML = `
+				<h4 class="list-group-item bloglist-item">
+					<input type="text" style="border: none;" class="js-title-text-edit" value="${blogItem.data.blog}" />
+				</h4>
+				<div class='list-group-item bloglist-item'>
+					<textarea class="js-content-text-edit">${blogItem.data.blogText}</textarea>
+				</div>
+			`;
+			editDiv.style.display = 'none';
+
+			const saveBtn = document.createElement('button');
+			saveBtn.classList.add('glyphicon', 'glyphicon-check', 'js-save');
+			saveBtn.style.float = 'right';
+
+			editDiv.querySelector('.bloglist-item').appendChild(saveBtn)
+
+			div.appendChild(editDiv);
+
+			closeBtn.addEventListener('click', (e) => {
+				DELETE('/api/blog/' + blogItem.id).then((data) => {
+					console.log('delete complete')
+					render(data)
+				});
 			});
-			li.querySelector('.js-todo-check').addEventListener('click', (e) => {
-				console.log(todoItem);
-				let isDone;
-				if (todoItem.data.isDone) {
-					isDone = false;
-				}
-				else {
-					isDone = true;
-				}
 
-				PUT('/api/todo/' + todoItem.id, {isDone})
-					.then((data) => {
-						render(data);
-					})
-					.catch((e) => {
-						alert(e)
-					})
+			editBtn.addEventListener('click', (e) => {
+				editDiv.style.display = 'block';
+				h4.style.display = 'none';
+				li.style.display = 'none';
+
+			});
+
+			saveBtn.addEventListener('click', (e) => {
+				PUT('/api/blog/' + blogItem.id, {
+					blog: editDiv.querySelector('.js-title-text-edit').value,
+					blogText: editDiv.querySelector('.js-content-text-edit').value
+				}).then((data) => {
+					console.log('delete complete')
+					render(data)
+				});
 			})
-			
 		}
 
-		if (todoItems.length === 0) {
+		if (blogItems.length === 0) {
 			container.innerHTML = `
-<li class="list-group-item">
-No todoitems!
-</li>
+			<li class="list-group-item">
+			No blogItems!
+			</li>
 			`;
 		}
 	} // render
 
 
-	GET('/api/todos')
-		.then((todoItems) => {
-			console.log(todoItems)
-			render(todoItems);
+	GET('/api/blog')
+		.then((blogItems) => {
+			render(blogItems);
 		});
 
-
-
-		// document.querySelector('.js-add-todo').addEventListener('click', (e) => {
-		// const input = document.querySelector('.js-todo-text');
-		// input.setAttribute('disabled', 'disabled');
-
-// 		POST('/api/todos', {
-// 			todo: input.value,
-// 			when: new Date().getTime() + 9 * 60 * 60 * 1000
-// 		}).then((data) => {
-// 			input.removeAttribute('disabled');
-// 			input.value = '';
-// 			render(data);
-// 		});
-// 	})
-
-// })();
-
-
-
-	document.querySelector('.js-add-todo').addEventListener('click', (e) => {
-		const input = document.querySelector('.js-todo-text');
-		const {keyCode, which} = e;
+	document.querySelector('.js-add-blog').addEventListener('click', (e) => {
+		const input = document.querySelector('.js-blog-text');
+		const textInput = document.querySelector('.js-blog-body-text');
 		input.setAttribute('disabled', 'disabled');
 
-
-	// document.querySelector('.js-add-text').addEventListener('keydown', (e) => {
- //        const {keyCode, which} = e;
- //        // console.log(keydown);
- //        if (keyCode === 13 || which === 13) {
- //        	console.log("You got 13")
- //   //         const input = document.querySelector('.js-todo-text');
-	// 		// input.setAttribute('disabled', 'disabled');
- //            }
- //    });
-
-
-
-		POST('/api/todos', {
-			todo: input.value,
+		POST('/api/blog', {
+			blog: input.value,
+			blogText: textInput.value,
 			when: new Date().getTime() + 9 * 60 * 60 * 1000
 		}).then((data) => {
 			input.removeAttribute('disabled');
 			input.value = '';
+			textInput.removeAttribute('disabled');
+			textInput.value = '';
 			render(data);
-
-			// alert('about to redirect to feed page...')
-			window.location.href = '/';
 		});
+
+		
 	})
 
-})();
 
-/*
-	return POST('/api/todos', {
-			todo: 'wake up',
-			when: new Date().getTime() + 9 * 60 * 60 * 1000
-		});
-	.then((dataFromPostLOL) => {
-		console.log(dataFromPostLOL);
-	});
-*/
+
+	
+})();
