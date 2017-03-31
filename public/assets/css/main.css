@@ -44,18 +44,18 @@ html{
 
 .col4 {
 	height: 200px;
-	border: 1px solid #000;
+	border: 10px solid black;
   	text-align: center;
-  	background-color: pink;
+  	background-color: #cccccc;
     box-sizing: border-box;
     font-size: 10px;
     
 }
 .col3 {
-  height: 200px;
-  border: 1px solid #000;
+  height: 50px;
+  border: 10px solid black;
     text-align: center;
-    background-color: brown;
+    background-color: #999999;
     box-sizing: border-box;
     font-size: 10px;
     

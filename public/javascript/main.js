@@ -93,7 +93,7 @@
 			h4.appendChild(editBtn);
 
 
-			h4.classList.add('list-group-item', 'bloglist-item');
+			h4.classList.add('list-group-item', 'bloglist-item', "css-h4-edit");
 
 			container.appendChild(h4);
 
@@ -103,7 +103,7 @@
 			`;
 
 
-			li.classList.add('list-group-item', 'bloglist-item');
+			li.classList.add('list-group-item', 'bloglist-item', "css-li-edit");
 
 			// const textarea = 
 
@@ -114,10 +114,10 @@
 
 			const editDiv = document.createElement('div');
 			editDiv.innerHTML = `
-				<h4 class="list-group-item bloglist-item">
+				<h4 class="list-group-item bloglist-item css-h4-edit">
 					<input type="text" style="border: none;" class="js-title-text-edit" value="${blogItem.data.blog}" />
 				</h4>
-				<div class='list-group-item bloglist-item'>
+				<div class='list-group-item bloglist-item css-bloglist-edit'>
 					<textarea class="js-content-text-edit">${blogItem.data.blogText}</textarea>
 				</div>
 			`;
